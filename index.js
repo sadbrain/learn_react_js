@@ -1,3 +1,5 @@
+//giai tuc la lam mat di [] or {} va lay nhung phan tu con => spread
+//va no se duoc chuyen lam doi so
 var arr1 = ["JS", "Ruby", "C#"]
 var arr2 = ["ReactJS", "Dart"]
 //noi arr1 va arr2
