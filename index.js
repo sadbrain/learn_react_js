@@ -3,17 +3,21 @@
 //export load ra
 //muon dung cai gi => import ma import cai gi thi phai export cai do ra
 //example muon dung ham logger tai module1 thi phai import logger function, o module2 thi phai export no ra.
-console.log(1,2);
 //destructuring de ma import nhieu cai
 //khi import nhu nay thi dang import logger as export default   
-import logger, {
+import l2, {
     TYPE_LOG,
     TYPE_WARN,
     TYPE_ERROR,
+    sum
 }from "./logger.js";
+const arr1 = [1,2,3];
+const arr2 = [3,4,6];
 //import * as logger from "./logger.js";
-logger(1,2,3,4,5);
-
+l2([...arr1, ...arr2], TYPE_ERROR);
+console.log(sum(1,2))
+const arr3 = [...   arr1, ...arr2]
+console.log(arr3)
 
 //
 // import logger from "./logger.js";
