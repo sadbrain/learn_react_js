@@ -1,1 +1,59 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script> 
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+    <script>
+        // const root = document.querySelector("#root");
+        // const ul = React.createElement("ul", null, "hihi");
+        // ngoai kieu tag ra thi no con ho tro nhieu kieu khac nhu string , function/class 
+        //function/class de ho tro chia component 
+        //khi nao dung component function, component class
+        //gan 100% dung function component vi no co khai niem hook no co the lam tat ca moi thu cua class component
+        //khi nao can dung nhung tinh chat cua oop => class component
+    </script>
+    <script type="text/babel">
+        const root = document.querySelector("#root");
+        //ten function component nen duoc viet hoa
+        function Header(){
+            return (
+                <div className="header">Header</div>
+            )
+        }
+        function Footer(){
+            return (
+                <div className="footer">Footer</div>
+            )
+        }
+        //trong JSX co ho tro dung function component thanh the vi du
+        // <Header/> or  <Header> <Header/>
+
+            //cach viet theo kieu class component
+        class Content extends React.Component{
+            render(){
+                return (
+                    <div className="content">Content</div>
+                 )
+            }
+        }
+        const app = (
+            <div className="wrapper">
+                <Header/>
+                <Content/>
+                <Footer/>
+            </div>
+        )
+       
+
+        ReactDOM.render(app, root)
+    </script>
+</body>
+</html> 
