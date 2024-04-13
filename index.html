@@ -1,1 +1,71 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script> 
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- 1. always use React.createElement()
+
+        3. JSX khong phai la HTML, 
+            Can co JS, Babel de dung JSX
+        4. JSX va React-DOM -->
+        <div id="root"></div>
+    
+<!-- khi ma trang web duoc chay xong thi no se tim co script nao co text "babel" hay khong
+ no se phan tich cu phap text bable thanh js va day mot script type javascript len va thuc thi script -->
+<script type="text/babel">
+    console.log(1)
+    // nhu mi thay thi dung React.createElement() de tao React element de render thi kho ma quan ly khi can nhieu element 
+        //mot cach khac se dung JSX va dung thu vien babel de chuyen doi cu phap ES6 => ES5 => giup all brower chay duoc js 
+    // 2. JSX? Live demo: https://bit.ly/2VOIMN7
+    // JSX => javascript XML XML tuong tu nhu html
+    //JSX => mot phan cua js, Nó cho phép bạn viết mã HTML tương tự như cú pháp trong JavaScript
+    //khi no duo bien dich thi no se chuyen sang cac ham js binh thuong to create element UI
+
+    //JSX
+    
+        const ul = 
+                <ul>
+                        <li>Javascript</li>
+                        <li>ReactJS</li>
+                </ul>
+    //khi duoc bien dich se thanh ben duoi
+    // {code JS trong JSX}
+        // const ul = React.createElement(
+        //     "ul",
+        //     null,
+        //     React.createElement('li', null, 'Javascript'),
+        //     React.createElement('li', null, 'ReactJS'),
+        // )
+    
+
+
+    const root = document.querySelector("#root");
+    ReactDOM.render(ul, root)
+
+
+    // bai tap
+
+    const courses = [
+        {name: 'HTML, CSS'},
+        {name: 'PHP'},
+        {name: 'ReactJS'},
+    ]
+    const ul1 = (
+                <ul>
+                    {courses.map((c, index) => (
+                        <li key={index}>{c.name}</li>
+                    ))}
+                </ul>
+            );
+
+    ReactDOM.render(ul1, root)
+
+</script>
+</body>
+</html> 
