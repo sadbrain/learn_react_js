@@ -1,1 +1,73 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script> 
+    <h1>Add React to website</h1>
+    <div id="root"></div>
+    <!-- 1. github. NPMJS sanr pham cua ma nguon, UNPKG
+    UNPKG lay duoc cac thu vien cua js duoi dang url => cdn
+    cdn la dong bo het cac file tren toan may chu o the gioi. khi nguoi dung
+    truy cap mot cai file thi ho se duoc truy cap o file gan nhat -->
+
+
+    <!-- React.createElement() -> React element
+    document.createElement() -> DOM element -->
+    <script>
+        //DOM
+        const h1 = document.createElement("h1");
+        h1.innerText = "Hello";
+        h1.title = "Hello";
+        h1.className = "heading"
+        document.body.appendChild(h1);
+
+        //React -> muon render React DOM
+        //React.createElement(type, props, children, n)
+        const h2 = React.createElement('h1', {
+            title: "hello",
+            className: 'heading',
+        }, "Hello guys!")
+        // vi cai noi dung cua react la mot kieu du lieu trong 
+        // nen khong the nao them bang cach innerText
+
+        //DOM
+        const ul = document.createElement("ul")
+        const li1 = document.createElement("li");
+        li1.innerText = "JavaScript";
+        const li2 = document.createElement("li");
+        li2.innerText = "ReactJs";
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        document.body.appendChild(ul);
+
+        // React
+        const ulReact = React.createElement(
+            'ul', 
+            null,
+            React.createElement("li", null, "Javascript"),
+            React.createElement("li", null, "React")
+        )
+
+
+        // ReactDOM -> render ra giao dien nguoi dung
+        // cau noi giua React va DOM 
+        // tao ra React Element and render it outside DOM 
+
+        const  postItem = React.createElement('div', {
+            className: "prop-item"
+        }, 
+            React.createElement("h2",{title:"Hoc React tai F8"}, "Hoc ReactJS"),
+            React.createElement("p",null, "Hoc ReactJS tu co ban toi nang cao")
+        )   
+        //get root
+        const root = document.querySelector("#root")
+        //React DOM -> render UI
+        ReactDOM.render(postItem, root);
+    </script>
+</body>
+</html>
