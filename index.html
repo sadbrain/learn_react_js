@@ -1,1 +1,75 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script> 
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+    <script type="text/babel">
+        // ui component chi nen  lam viec de hien thi du lieu 
+        const root = document.querySelector("#root");
+        //component viet theo kieu pascalcase
+        const Form = {
+            Input(){
+                return <input/>
+            },
+            CheckBox(){
+                return <input type="CheckBox"/>
+            }
+        }
+        // //phụ thuộc vào type ma lựa chọn các kiểu input khác nhau
+        // function App(){
+        //     const type = "CheckBox";
+        //     const Component = Form[type];
+        //     return (
+        //         <div class="wrapper">
+        //             <Form.Input/>
+        //             <Form.CheckBox/>
+        //             <Component/>
+        //         </div>
+        //     )
+        // }
+
+
+        //thay đổi hàm chức năng của nút như nút có onclick thì sẽ thực hiện hàm, có thuộc tính href sẽ tạo ra thẻ a
+        //đồng thời có cả hai thì chạy cả hai
+        function Button({title, href, onClick}){
+            let Component = "button"
+            const props = {}
+            if(href){
+                Component = "a"
+                props.href = href
+            }
+                    if(onClick){
+                props.onClick = onClick
+            }
+            return(
+                <Component {...props}>{title}</Component>
+            )
+        }
+        function App(){
+            const type = "CheckBox";
+            const Component = Form[type];
+            return (
+                <div class="wrapper">
+                    <Button
+                        title="Click me!"
+                        // href = "https://fullstack.edu.vn/"
+                        onClick={() => {console.log(Math.random())}}
+                    />
+          
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App/>, root);
+
+    </script>
+</body>
+</html> 
