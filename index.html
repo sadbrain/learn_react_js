@@ -1,1 +1,88 @@
-<script src="index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script> 
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+
+
+        const root = document.querySelector("#root");
+        //props in JSX
+        // <YourComponent  propName1 = "string literal" propName2 = {expression}/>
+        //expression is not if else case
+        // const Button = ({title}) => <button>{title}</button> 
+        // const App = () =>{
+        //     return(
+        //         <div className="wrapper"> 
+        //             <Button title="Click me!"/>
+        //             <Button title={"Hello anh em"}/>
+        //         </div>
+        //     )
+        // }
+
+
+
+        //prop default to "true"
+        // const Button = ({title, primary}) => {
+
+        //     return <button>{title}</button> 
+        // } 
+        // const App = () =>{
+        //     return(
+        //         <div className="wrapper"> 
+        //             <Button primary title="Click me!"/>
+        //             <Button title={"Hello anh em"}/>
+        //         </div>
+        //     )
+        // }
+
+
+        // spread and rest 
+        // const Input = ({label, ...inputProps}) => {
+
+        //     return (
+        //         <div>
+        //             <label>{label}</label>
+                    
+        //             <input {...inputProps}/> 
+        //         </div>
+        //     )
+        // } 
+        // const App = () =>{
+        //     return(
+        //         <div className="wrapper"> 
+        //             <Input label="Full name" type="checkBox" placeholder="Enter name..."/>
+        //         </div>
+        //     )
+        // }
+
+        //child prop
+
+        const Button = ({children}) => {
+
+            return <button>{children}</button> 
+        } 
+        const App = () =>{
+            return(
+                <div className="wrapper"> 
+                    <Button>Click me!</Button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App/>, root);
+
+
+    </script>
+</body>
+</html> 
