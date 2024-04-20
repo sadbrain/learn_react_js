@@ -1,40 +1,16 @@
-import {useState} from "react";
+import Content from "./Content"
+import { useState } from "react";
+//mounted dua mot component vao de su dung
+//unmounted: remove a componet from other component
 
+//example to: 
+//step 1 create Content component
 const App = () => {
-  const [jobs, setJobs] = useState(() => {
-    return localStorage.getItem("job") 
-           ? JSON.parse(localStorage.getItem("job"))
-          : []
-  })
-  const [job, setJob] = useState("")
-
-  const handleSumbit = () => {
-    setJobs(prev => {
-      const newJobs = [...prev, job];
-
-      //save to local storage
-      const jsonJobs = JSON.stringify(newJobs)
-      localStorage.setItem("job", jsonJobs);
-
-      return newJobs
-    })
-    setJob("")
-  }
+  const [show, setShow] = useState(false);
   return (
-    <div style={{padding:32}}>
-        <input
-          value={job}
-          onChange = {(e) => setJob(e.target.value)}
-        />
-        <button onClick={handleSumbit}>Add</button>
-
-        <ul>
-          {
-            jobs.map((j, i) => (
-              <li key={i}>{j}</li>
-            ))
-          }
-        </ul>
+    <div style={{padding: 30}}>
+      <button onClick={() => setShow(!show)}>Toggle</button>
+      {show && <Content/>}       
     </div>
   )
 }
