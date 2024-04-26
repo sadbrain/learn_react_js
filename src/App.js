@@ -21,6 +21,10 @@ import { useEffect , useState} from "react";
 // 4. clean up 
     // - remove listener/ unsubcribe 
     // - clear timer
+
+
+//        call api with dependencies
+const tabs = ["posts", "comments", "albums"]
 const App = () => {
   // 1. useEffect(callback)
     // - call callback every time the component re-render
@@ -33,32 +37,38 @@ const App = () => {
 
   //--------, general theory
   //callback is always called after component is mounted
-  // 1. 
+  // 1. --call back duoc goi lai dependencies bi thay doi
   const [title, setTitle] = useState('')
   const [posts, setPosts] = useState([])
+  const [type, setType] = useState('posts')
   useEffect(() => {
-    console.log("re-render")
-    document.title = title
-  })
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/posts")
-  //   .then(res => res.json())
-  //   .then(posts => {
-  //     setPosts(posts);
-  //   })
-  // }, [])
+    fetch("https://jsonplaceholder.typicode.com/${type}")
+    .then(res => res.json())
+    .then(posts => {
+      setPosts(posts);
+    })
+  }, [type])
+  //dependencies is simplely variable
   return (
+
     <div style={{padding: 30}}>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-       {/* <ul>
-          {posts.map((p, i) => (
-            <li key={i}>{p.id + " " +p.title}</li>
-          ))}     
-       </ul>         */}
+        {tabs.map((tab, i) => (
+          <button key={i}
+            style={type === tab ? {
+              color:'#fff',
+              backgroundColor:'#333'
+            } : {}}
+            onClick={() => setType(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+
+        {posts.map((post,i) => (
+          <li key={i}>{post.title || post.name}</li>
+        ))}
     </div>
+
   )
 }
 
