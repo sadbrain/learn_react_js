@@ -1,33 +1,44 @@
-import { useState, useLayoutEffect } from "react";
-// uselayoutEffect and useEffect are the same
-//useEffect mac dinh dung 
-// 1. cap nhat lai state
-// 2. cap nhat lai DOM (mutated)
-// 3. render lai UI
-// 4. Call clean up neu deps change
-// 5. Call useEffect callback
+import { useState, useRef, useEffect } from "react";
+// Use Ref
+// luu cac gia tri qua mot bien tham chieu o ben ngoai 
+// funciton Component 
 
-//useLayoutEffect
-// 1. cap nhat lai state
-// 2. cap nhat lai DOM (mutated)
-// 3. Call clean up neu deps change (sync)
-// 4. Call useEffect callback (sync) thang nay thuc hien xong moi render lai ui
-// 5. render lai UI
+//use Rel tuong tu nhu vi dua timerId ra ngoai component function
+
 function Content() {
-    //render lai neu count > 3 se ve 0, no se bi dat neu dung useEffect vi count tang thanh 4 roi hien thi ra dom moi den useEffect
     
-    const [count, setCount] = useState(0)
-    console.log(1);
-    useLayoutEffect(()=>{
-        if(count > 3) setCount(0)
-    }, [count])
+    const [count, setCount] = useState(60)
+    const preCount = useRef()
+    const timerId = useRef()
+    const h1Ref = useRef()
+    // => lay gia tri ref.current 
+    const handleStart = () => {
+        timerId.current  = setInterval(() => {
+            setCount(prev => prev - 1)
+        },1000)
 
+    }
+    useEffect(()=>{
+        preCount.current = count
+    }, [count])
+    const handleStop = () => {
+        if(timerId.current){
+            clearInterval(timerId.current) 
+
+        }
+        // => se khong dung duoc neu Content component reder lai 
+        // vi timerId no se la undefined 
+        // => use ref
+    }
+    console.log(count, preCount.current)
     return (
         <div>
+            <h1 ref={h1Ref}>Hi ar</h1>
             {
                 count
             }
-            <button onClick={() => {setCount(prev => prev+1)}}>Click me</button>
+            <button onClick={handleStart}>Start</button>
+            <button onClick={handleStop}>Stop</button>
         </div>
     )
 }
