@@ -1,56 +1,50 @@
-import Content from "./Content"
-import { useState, useMemo, useCallback, useRef } from "react";
-// mome trang prop of a component render lai khong can thiet 
-//useMemo thi tranh lap lai logic khong can thiet
+import { useState, useReducer } from "react";
 
-const App = () => {
-  const [products, setProducts] = useState([])
-  const [price, setPrice] = useState("")
-  const [name, setName] = useState("")
-  const nameInRef = useRef()
-  const handleSumbit = () => {
-    setProducts([...products, {
-      name,
-      price: +price
-    }])
+// use Reducer 
+//cho them mot su lua chon de su dung state cho function componet
+//use state or use Reducer thang nao cung duoc
+//use state dung cho kieu du lieu nguyen thuy, it phuc tap
 
-    setName("")
-    setPrice("")
+//use reducer dung cho nhung stat phuc tap hon nhu array, obj long nhau
 
-    nameInRef.current.focus()
+
+//use Reducer
+// 1. init state 
+// 2. Action 
+// 3. reducer 
+// 4. dispatch 
+// 1. 
+const initState = 0;
+// 2. 
+const UP_ACTION = "up";
+const DOWN_ACTION = "down";
+//3.
+const reducer = (state, action) =>{
+  switch(action){
+      case UP_ACTION:
+        return state + 1
+      case DOWN_ACTION:
+        return state - 1
+      default:
+        throw new Error("Invalid action")
   }
-  // const total = reduce no se bi tinh lai mot cach khong can thiet 
-  // => useMemo 
-  const total = useMemo(() => {
-    console.log("Tinh toan lai")
-    const result = products.reduce((result, prod) => {
-        return result + prod.price
-    }, 0)
+}
 
-    return result
-  }, [products]) //=> giong voi denpen of useEffect
-  console.log(products)
+// 4. 
+const App = () => {
+  //lan dau reducer chua goi voi, nhan gia tri khoi tao va return lai mot mang
+  //setCount day la dispatch thagn nay viet dung action nao se duoc thuc thi
+  const [count, dispatch] = useReducer(reducer, initState)
   return (
 
       <div>
-          <input
-            ref={nameInRef}
-            value={name}
-            placeholder="Enter name..."
-            onChange={e => setName(e.target.value)}
-          />
-            <input
-            value={price}
-            placeholder="Enter price..."
-            onChange={e => setPrice(e.target.value)}
-          />
-          <button onClick={handleSumbit}>sumbit</button>
-        Total: {total}
-        <ul>
-          {products.map((p, i) => {
-            <li key={i}>{p.name} - {p.price}</li>
-          })}
-        </ul>
+          <h1>{count}</h1>
+          <button onClick = {() => dispatch(DOWN_ACTION)}>
+            Down
+          </button>
+          <button onClick = {() => dispatch(UP_ACTION)}>
+            Up
+          </button>
       </div>
   )
 }
