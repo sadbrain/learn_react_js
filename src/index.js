@@ -4,6 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const emmitCommit = (id) => {
+  setInterval(() => {
+
+    //chu dong tu phat mot event
+    //bat cu file deu co the lang nghe su kien nay
+    window.dispatchEvent(
+      new CustomEvent(`lesson-${id}`,{
+        detail: `Noi dung comment cua lesson ${id}`
+      })
+    )
+  }, 2000)
+}
+emmitCommit(1);
+emmitCommit(2);
+emmitCommit(3);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
