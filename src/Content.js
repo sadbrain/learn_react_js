@@ -1,32 +1,26 @@
-import { useState, useEffect } from "react";
-//dung taij pham vi global ban ra su kien tai index.js
-const lessons = [
-    {
-        id: 1,
-        name: 'ReactJS'
-    },
-    {
-        id:2,
-        name: "JS"
-    },
-    {
-        id:3,
-        name: "C#"
-    }
-]
+import { useState, useLayoutEffect } from "react";
+// uselayoutEffect and useEffect are the same
+//useEffect mac dinh dung 
+// 1. cap nhat lai state
+// 2. cap nhat lai DOM (mutated)
+// 3. render lai UI
+// 4. Call clean up neu deps change
+// 5. Call useEffect callback
+
+//useLayoutEffect
+// 1. cap nhat lai state
+// 2. cap nhat lai DOM (mutated)
+// 3. Call clean up neu deps change (sync)
+// 4. Call useEffect callback (sync) thang nay thuc hien xong moi render lai ui
+// 5. render lai UI
 function Content() {
-    // subcrible and unsubcrible 
-    // nhieu nguoi dang theo doi mot kenh nen khi co su thay doi gi o kenh nay 
-    //moi nguoi deu co the thay duoc
+    //render lai neu count > 3 se ve 0, no se bi dat neu dung useEffect vi count tang thanh 4 roi hien thi ra dom moi den useEffect
+    
     const [count, setCount] = useState(0)
     console.log(1);
-    useEffect(()=>{
-        console.log("call back is call")
-        return () => {
-            console.log("Clean up")
-        }
-    }, [])
-    console.log(count)
+    useLayoutEffect(()=>{
+        if(count > 3) setCount(0)
+    }, [count])
 
     return (
         <div>
