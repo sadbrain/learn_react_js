@@ -1,51 +1,29 @@
-import { useState, useReducer } from "react";
-
-// use Reducer 
-//cho them mot su lua chon de su dung state cho function componet
-//use state or use Reducer thang nao cung duoc
-//use state dung cho kieu du lieu nguyen thuy, it phuc tap
-
-//use reducer dung cho nhung stat phuc tap hon nhu array, obj long nhau
-
-
-//use Reducer
-// 1. init state 
-// 2. Action 
-// 3. reducer 
-// 4. dispatch 
-// 1. 
-const initState = 0;
-// 2. 
-const UP_ACTION = "up";
-const DOWN_ACTION = "down";
-//3.
-const reducer = (state, action) =>{
-  switch(action){
-      case UP_ACTION:
-        return state + 1
-      case DOWN_ACTION:
-        return state - 1
-      default:
-        throw new Error("Invalid action")
-  }
-}
-
-// 4. 
+import { useRef } from "react"
+import { useStore, actions } from "./store"
 const App = () => {
-  //lan dau reducer chua goi voi, nhan gia tri khoi tao va return lai mot mang
-  //setCount day la dispatch thagn nay viet dung action nao se duoc thuc thi
-  const [count, dispatch] = useReducer(reducer, initState)
+  const [state, dispatch] = useStore()
+  console.log(state)
+  const refIn = useRef()
+  const handleSumbit = () => {
+    dispatch(actions.addTodoInput(state.todoInput))
+    dispatch(actions.setTodoInput(""))
+    refIn.current.focus()
+  }
   return (
-
       <div>
-          <h1>{count}</h1>
-          <button onClick = {() => dispatch(DOWN_ACTION)}>
-            Down
-          </button>
-          <button onClick = {() => dispatch(UP_ACTION)}>
-            Up
-          </button>
-      </div>
+        <input
+          ref={refIn}
+          value={state.todoInput}
+          placeholder="Enter todo..."
+          onChange={e => dispatch(actions.setTodoInput(e.target.value))}
+        />
+        <button onClick={handleSumbit}>Add</button>
+          {state.todos.map((t,i) => (
+            <li key={i}>{t}</li>
+           ))}
+     </div>
+      
+
   )
 }
 
